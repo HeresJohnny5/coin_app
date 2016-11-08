@@ -7,8 +7,8 @@
 # eg. If you have 31 cents you should return {:quarter => 1, :nickel => 1, :penny => 1};
 # eg. If you have 93 cents {:quarter => 3, :dime => 1, nickel => 1, :penny => 3}
 
-require_relative "coin_functions.rb"
-require "minitest/autorun"
+require_relative 'coin_functions.rb'
+require 'minitest/autorun'
 
 class CoinAppTest < Minitest::Test 
 
