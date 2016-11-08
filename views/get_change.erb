@@ -1,0 +1,7 @@
+Alright <%= your_name%>, it is. <br/> So, <%= your_name%> how much change do you need?
+
+<form action="change" method="post">
+	<input type="number" name="user_change">
+	<input type="text" name="user_name" value=<%= your_name%> hidden>
+	<input type="submit">
+</form>

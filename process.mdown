@@ -1,0 +1,89 @@
+I created a folder hierarchy:
+	coin_app(f)
+		coin_app.rb
+		coin_app_test.rb - Test Boilerplate
+		process.mdown
+		views(f)
+
+I created a new gihub repository called coin_app
+
+Before working on the app itself, I started writing tests: 
+	My first test returned the string "Hello". This confirmed that coin_app.rb and coin_app_test.rb are functioning correctly
+
+****Tests:
+	1 run/1 assertion
+	* Note *
+		I substituted an empty array for currency = {:Dollar => 100, :Quarter => 25, :Dime => 10, :Nickel => 5, :Penny => 1}
+
+	4 runs/4 assertions. Tests added:
+		test_returns_hash_with_one_penny
+		test_returns_hash_with_two_pennies
+		test_returns_hash_with_four_pennies
+	* Note *
+		I made 3 separate conditional statements rather than one if/elsif/else statement. This is due to failed tests.
+
+	7 runs/7 assertions. Tests added:
+		test_returns_hash_with_one_nickel
+		test_returns_hash_with_one_nickel_and_one_penny
+		test_returns_hash_with_one_nickel_and_three_pennies. 
+
+	11 runs/11 assertions. Tests added:
+		test_returns_hash_with_one_dime
+		test_returns_hash_with_one_dime_and_three_pennies
+		test_returns_hash_with_one_dime_and_one_nickel
+		test_returns_hash_with_one_dime_and_one_nickel_and_two_pennies
+
+	12 runs/11 assertions, 1 failure:
+		test_returns_hash_with_two_dimes
+			first condition is met (20 > 5) adding key :Dime => value 1 to the currency hash. The code moves to the next block, which again is met (10 > 5) adding key :Nickel => 1 to the currency hash. The code moves to the next code block, which again is met (5 >= 5) adding key :Penny => 5. 
+
+	13 runs/13 assertions. Tests added:
+		test_returns_hash_with_two_dimes
+		test_returns_hash_with_two_dimes_and_one_penny
+
+	19 runs/19 assertions. Tests added:
+		test_returns_hash_with_one_quarter
+		test_returns_hash_with_one_quarter_and_two_pennies
+		test_returns_hash_with_one_quarter_and_one_nickel_and_one_penny
+		test_returns_hash_with_one_quarter_and_one_dime
+		test_returns_hash_with_one_quarter_and_one_dime_and_two_pennies
+		test_returns_hash_with_one_quarter_and_one_dime_and_one_nickel_and_three_pennies
+
+	20 runs/20 assertions. Tests added:
+		test_returns_hash_with_two_quarters
+	* Note *
+		Although my code is passing correctly I foresee a potential problem. Once cents hits 75 the conditional statement (cents >= 50) will pass true, however cents will return 25 rather than 0. I can easily create a new coinditional (cents >= 75). The other problem is there is a lot of conditional repetition.
+
+	22 runs/22 assertsions. Tests added:
+		test_returns_hash_with_three_quarters_and_three_pennies
+		test_returns_hash_with_three_quarters_and_one_dime_and_one_nickel_and_one_penny
+	* Note *
+		I added the following variables set in place for the currency value: quarter_value, dime_value, nickel_value, penny_value.
+
+	23 runs/23 assertions. Tests added:
+		test_returns_hash_with_one_dollar
+	* Note *
+		I refactored the 9 conditional statements to one nested inside a each loop.
+		I removed all unecessary commented code.
+
+	25 runs/25 assertions. Tests added:
+		test_returns_hash_with_five_dollars_one_quarter_one_dime_one_nickel_two_pennies
+		test_returns_hash_with_twenty_nine_dollars_one_quarter_one_nickel_one_pennies
+****
+
+My tests are refactored and functioning correctly.
+
+I moved the function generate_change into a new file - coin_functions.rb and changed the require_relative on the coin_app_test.rb. All 25 tests still pass.
+
+I created a new app.rb file requiring sinatra and coin_functions.rb (require_relative). I created a get_name.erb and created the necessary code to ask for the user's name in a text input.
+
+The "/return" page is receiving both the name and change input.
+
+I created 3 erb files: get_name, get_change and result.
+	get_name renders information on the website from the server asking the user to input their name.
+
+	get_change renders information on the website from the server asking the user to input how much change they need.
+
+	The post "/change" converts change to a integer; user input is a string and a string will not work with the generate_change function.
+
+	The post "/change" also calls the function generate_change and stores the hash into a variable.   
